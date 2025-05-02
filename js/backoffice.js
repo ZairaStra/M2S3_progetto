@@ -36,7 +36,7 @@ window.onload = function () {
 };
 
 form.onsubmit = function (e) {
-  e.preventeDefault();
+  e.preventDefault();
   const plantName = document.getElementById("plant-name");
   const plantDescription = document.getElementById("plant-description");
   const plantOrigin = document.getElementById("plant-origin");

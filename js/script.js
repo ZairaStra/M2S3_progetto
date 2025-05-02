@@ -44,7 +44,7 @@ const getPlants = () => {
         flex.className = "d-flex justify-content-between align-items-center";
 
         const btnGroup = document.createElement("div");
-        btnGroup.className = "btn-group d-flex flex-wrap";
+        btnGroup.className = "btn-group d-flex";
 
         const viewBtn = document.createElement("a");
         viewBtn.href = "./details.html";
