@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 
-const plantId = params.get("plantId;");
+const plantId = new URLSearchParams(window.location.search).get("plantId");
 console.log(plantId);
 
 const url = plantId ? "https://striveschool-api.herokuapp.com/api/product/" + plantId : "https://striveschool-api.herokuapp.com/api/product/";
@@ -18,7 +18,6 @@ window.onload = function () {
 
     fetch(url, {
       method: method,
-      body: JSON.stringify(addPlant),
       headers: {
         "Content-Type": "application/json",
         Authorization:
@@ -78,10 +77,17 @@ form.onsubmit = function (e) {
       return resp.json();
     })
     .then((addedPlant) => {
-      if (id) {
-        alert("Hai modificato le caratteristiche del prodotto" + addedPlant.name);
+      const body = document.querySelector("body");
+      const alert = document.createElement("div");
+      if (plantId) {
+        /*  alert.className = "alert alert-warning";
+        alert.innerText = `Hai modificato le caratteristiche del prodotto ${addedPlant.name}`;
+        body.appendChild(alert); */
+        window.location.assign("./index.html");
       } else {
-        alert("Hai aggiunto il prodotto " + addedPlant.name + "alla tua vetrina");
+        /*  alert.className = "alert alert-success";
+        alert.innerText = `Hai aggiunto il prodotto ${addedPlant.name}alla tua vetrina`;
+        body.appendChild(alert); */
         form.reset();
       }
     })
@@ -89,10 +95,21 @@ form.onsubmit = function (e) {
 };
 
 deleteBtn.onclick = function () {
-  fetch(url, { method: "DELETE" })
+  fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE0ODI5MjFjMjUwNDAwMTUxYWI2NzAiLCJpYXQiOjE3NDYxNzQ2MTAsImV4cCI6MTc0NzM4NDIxMH0.hYrdAU1LOKDI1x3s7Yk3SD28h29gyID1UzQQHyudOfc",
+    },
+  })
     .then((resp) => {
       if (resp.ok) {
-        alert("Hai eliminato il prodotto dalla vetrina");
+        /*  const body = document.querySelector("body");
+        const alert = document.createElement(div);
+        alert.className = "alert alert-danger";
+        alert.innerText = `Hai eliminato il prodotto ${addedPlant.name} dalla vetrina`;
+        body.appendChild(alert); */
         window.location.assign("./index.html");
       }
     })
