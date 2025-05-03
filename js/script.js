@@ -21,7 +21,7 @@ const getPlants = () => {
     .then((plants) => {
       plants.forEach((plant) => {
         const col = document.createElement("div");
-        col.className = " col-12 col-sm-6 col-lg-4 col-xl-3";
+        col.className = "col-12 col-sm-6 col-lg-4 col-xl-3";
 
         const card = document.createElement("div");
         card.className = "card mb-4 shadow-sm";

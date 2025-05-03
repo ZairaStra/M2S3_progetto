@@ -21,19 +21,18 @@ const getDetails = () => {
       return resp.json();
     })
     .then((plant) => {
-      const detailContainer = document.getElementById("detail-container");
+      const row = document.getElementById("row");
 
-      const flex = document.createElement("div");
-      flex.className = "d-flex justify-content-between";
+      const imgCol = document.createElement("div");
+      imgCol.className = "col-9 col-sm-8 col-lg-6";
 
       const img = document.createElement("img");
       img.src = plant.imageUrl;
       img.className = "rounded";
-      img.style.width = "400px";
-      img.style.maxWidth = "50%";
+      img.style.width = "100%";
 
-      const textArea = document.createElement("div");
-      textArea.style.maxWidth = "50%";
+      const textCol = document.createElement("div");
+      textCol.className = "col-12 col-sm-4 col-lg-6";
 
       const title = document.createElement("h1");
       title.className = "card-title display-4 mb-3";
@@ -55,14 +54,16 @@ const getDetails = () => {
       publicPrice.className = "font-monospace d-block";
       publicPrice.innerText = "Prezzo al pubblico: " + plant.price + "€";
 
-      textArea.appendChild(title);
-      textArea.appendChild(p);
-      textArea.appendChild(addP);
-      textArea.appendChild(backofficePrice);
-      textArea.appendChild(publicPrice);
+      imgCol.appendChild(img);
 
-      detailContainer.appendChild(img);
-      detailContainer.appendChild(textArea);
+      textCol.appendChild(title);
+      textCol.appendChild(p);
+      textCol.appendChild(addP);
+      textCol.appendChild(backofficePrice);
+      textCol.appendChild(publicPrice);
+
+      row.appendChild(imgCol);
+      row.appendChild(textCol);
     })
     .catch((error) => {
       console.error("Errore durante la fetch:", error);
