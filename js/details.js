@@ -23,9 +23,6 @@ const getDetails = () => {
     .then((plant) => {
       const detailContainer = document.getElementById("detail-container");
 
-      /* const col = document.createElement("div");
-      col.className = "col-12 col-sm-9"; */
-
       const flex = document.createElement("div");
       flex.className = "d-flex justify-content-between";
 

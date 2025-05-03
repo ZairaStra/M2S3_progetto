@@ -32,6 +32,10 @@ const getPlants = () => {
 
         const img = document.createElement("img");
         img.className = "bd-placeholder-img card-img-top";
+        img.style.width = "100%";
+        img.style.height = "300px";
+        img.style.objectFit = "cover";
+
         img.src = plant.imageUrl;
 
         const title = document.createElement("h5");
