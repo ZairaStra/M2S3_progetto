@@ -80,11 +80,13 @@ form.onsubmit = function (e) {
       const body = document.querySelector("body");
       const alert = document.createElement("div");
       if (plantId) {
+        alert(`Hai modificato le caratteristiche del prodotto ${addedPlant.name}`);
         /*  alert.className = "alert alert-warning";
         alert.innerText = `Hai modificato le caratteristiche del prodotto ${addedPlant.name}`;
         body.appendChild(alert); */
         window.location.assign("./index.html");
       } else {
+        alert(`Hai aggiunto il prodotto ${addedPlant.name}alla tua vetrina`);
         /*  alert.className = "alert alert-success";
         alert.innerText = `Hai aggiunto il prodotto ${addedPlant.name}alla tua vetrina`;
         body.appendChild(alert); */
@@ -110,6 +112,7 @@ deleteBtn.onclick = function () {
         alert.className = "alert alert-danger";
         alert.innerText = `Hai eliminato il prodotto ${addedPlant.name} dalla vetrina`;
         body.appendChild(alert); */
+        alert(`Hai eliminato il prodotto ${addedPlant.name} dalla vetrina`);
         window.location.assign("./index.html");
       }
     })

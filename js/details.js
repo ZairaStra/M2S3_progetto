@@ -61,11 +61,6 @@ const getDetails = () => {
       textArea.appendChild(backofficePrice);
       textArea.appendChild(publicPrice);
 
-      /* flex.appendChild(img);
-      flex.appendChild(textArea);
-
-       col.appendChild(flex); */
-
       detailContainer.appendChild(img);
       detailContainer.appendChild(textArea);
     })
