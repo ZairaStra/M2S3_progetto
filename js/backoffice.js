@@ -6,10 +6,13 @@ console.log(plantId);
 const url = plantId ? "https://striveschool-api.herokuapp.com/api/product/" + plantId : "https://striveschool-api.herokuapp.com/api/product/";
 const method = plantId ? "PUT" : "POST";
 const form = document.getElementById("form");
+const alertContainer = document.getElementById("alert-container");
 
 window.onload = function () {
   const variableH = document.getElementById("variableH");
+  variableH.style.color = " #496247";
   const successBtn = document.getElementById("successBtn");
+
   if (plantId) {
     variableH.innerText = "Aggiorna prodotto";
     successBtn.innerText = "Aggiorna";
@@ -77,19 +80,21 @@ form.onsubmit = function (e) {
       return resp.json();
     })
     .then((addedPlant) => {
-      const body = document.querySelector("body");
-      const alert = document.createElement("div");
       if (plantId) {
-        alert(`Hai modificato le caratteristiche del prodotto ${addedPlant.name}`);
-        /*  alert.className = "alert alert-warning";
-        alert.innerText = `Hai modificato le caratteristiche del prodotto ${addedPlant.name}`;
-        body.appendChild(alert); */
-        window.location.assign("./index.html");
+        const updateAlert = document.createElement("div");
+        updateAlert.className = "alert alert-warning";
+        updateAlert.innerHTML = `Hai modificato i dati del prodotto ${addedPlant.name} nella tua vetrina. <a href="./">Torna alla Homepage</a>`;
+
+        alertContainer.appendChild(updateAlert);
+
+        /* window.location.assign("./index.html"); */
       } else {
-        alert(`Hai aggiunto il prodotto ${addedPlant.name}alla tua vetrina`);
-        /*  alert.className = "alert alert-success";
-        alert.innerText = `Hai aggiunto il prodotto ${addedPlant.name}alla tua vetrina`;
-        body.appendChild(alert); */
+        const addAlert = document.createElement("div");
+        addAlert.className = "alert alert-success";
+        addAlert.innerHTML = `Hai aggiunto il prodotto ${addedPlant.name} alla tua vetrina. <a href="./">Torna alla Homepage</a>`;
+
+        alertContainer.appendChild(addAlert);
+
         form.reset();
       }
     })
@@ -107,13 +112,11 @@ deleteBtn.onclick = function () {
   })
     .then((resp) => {
       if (resp.ok) {
-        /*  const body = document.querySelector("body");
-        const alert = document.createElement(div);
-        alert.className = "alert alert-danger";
-        alert.innerText = `Hai eliminato il prodotto ${addedPlant.name} dalla vetrina`;
-        body.appendChild(alert); */
-        alert(`Hai eliminato il prodotto ${addedPlant.name} dalla vetrina`);
-        window.location.assign("./index.html");
+        const deleteAlert = document.createElement("div");
+        deleteAlert.className = "alert alert-danger";
+        deleteAlert.innerHTML = `Hai eliminato il prodotto dalla vetrina. <a href="./">Torna alla Homepage</a>`;
+
+        alertContainer.appendChild(deleteAlert);
       }
     })
     .catch((error) => console.log(error));

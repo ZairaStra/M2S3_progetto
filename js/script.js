@@ -13,7 +13,7 @@ const getPlants = () => {
   })
     .then((resp) => {
       if (!resp.ok) {
-        //AGGIUNGERE ERRORI SPECIFICI CON AVVISI DI BOOTSTRAP - NON ALERT
+        //AGGIUNGERE ERRORI SPECIFICI
         throw new Error("Errore nel caricamento");
       }
       return resp.json();
@@ -21,14 +21,14 @@ const getPlants = () => {
     .then((plants) => {
       plants.forEach((plant) => {
         const col = document.createElement("div");
-        col.className = "col-12 col-sm-6 col-lg-4 col-xl-3";
+        col.className = "col-12 col-sm-6 col-lg-4 col-xxl-3";
 
         const card = document.createElement("div");
         card.className = "card mb-4 shadow-sm";
 
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
-        cardBody.style = "color: #496247";
+        cardBody.style.color = " #496247";
 
         const img = document.createElement("img");
         img.className = "bd-placeholder-img card-img-top";
@@ -55,12 +55,12 @@ const getPlants = () => {
         const viewBtn = document.createElement("a");
         viewBtn.href = `./details.html?plantId=${plant._id}`;
         viewBtn.className = "btn btn-outline-secondary";
-        viewBtn.innerText = "Scopri di più";
+        viewBtn.innerHTML = `<i class="bi bi-plus-lg"></i>`;
 
         const editBtn = document.createElement("a");
         editBtn.href = `./backoffice.html?plantId=${plant._id}`;
         editBtn.className = "btn btn-outline-secondary";
-        editBtn.innerText = "Modifica";
+        editBtn.innerHTML = `<i class="bi bi-pencil"></i>`;
 
         //SISTEMARE BOTTONE PER AGGIUNGERE AL CARRELLO NEL DROPDOWN DELLA NAVBAR
         /*const selectBtn = document.createElement("button");
@@ -79,7 +79,7 @@ const getPlants = () => {
         const price = document.createElement("small");
         price.className = "font-monospace fs-4";
         price.innerText = plant.price + "€";
-        price.style = "color: inherit";
+        price.style.color = "inherit";
 
         btnGroup.appendChild(viewBtn);
         btnGroup.appendChild(editBtn);

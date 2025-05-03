@@ -33,6 +33,7 @@ const getDetails = () => {
 
       const textCol = document.createElement("div");
       textCol.className = "col-12 col-sm-4 col-lg-6";
+      textCol.style.color = " #496247";
 
       const title = document.createElement("h1");
       title.className = "card-title display-4 mb-3";
