@@ -1,7 +1,9 @@
-const detailId = new URLSearchParams(window.location.search).get("plant.id");
-console.log(detailId);
-const url = new URLSearchParams(window.location.search);
-console.log(url);
+const params = new URLSearchParams(window.location.search);
+
+const plantId = new URLSearchParams(window.location.search).get("plantId");
+console.log(plantId);
+
+const url = "https://striveschool-api.herokuapp.com/api/product/" + plantId;
 
 const getDetails = () => {
   fetch(url, {
@@ -13,33 +15,62 @@ const getDetails = () => {
   })
     .then((resp) => {
       if (!resp.ok) {
+        //AGGIUNGERE ERRORI SPECIFICI
         throw new Error("Errore nel caricamento");
       }
       return resp.json();
     })
     .then((plant) => {
-      const container = document.getElementById("details-container");
+      const detailContainer = document.getElementById("detail-container");
 
-      const title = document.createElement("h1");
-      title.className = "card-title";
-      title.innerText = plant.name;
+      /* const col = document.createElement("div");
+      col.className = "col-12 col-sm-9"; */
+
+      const flex = document.createElement("div");
+      flex.className = "d-flex justify-content-between";
 
       const img = document.createElement("img");
       img.src = plant.imageUrl;
+      img.className = "rounded";
       img.style.width = "400px";
-      img.style.maxWidth = "100%";
+      img.style.maxWidth = "50%";
 
-      const text = document.createElement("p");
-      text.className = "card-text";
-      text.innerText = plant.description;
+      const textArea = document.createElement("div");
+      textArea.style.maxWidth = "50%";
 
-      const addText = document.createElement("p");
-      addText.className = "card-text";
-      addText.innerText = "Bolla di accompagnamento n." + plant._id;
+      const title = document.createElement("h1");
+      title.className = "card-title display-4 mb-3";
+      title.innerText = plant.name;
 
-      container.appendChild(title);
-      container.appendChild(img);
-      container.appendChild(description);
+      const p = document.createElement("p");
+      p.className = "card-text";
+      p.innerText = plant.description;
+
+      const addP = document.createElement("p");
+      addP.className = "card-text";
+      addP.innerText = "Bolla di accompagnamento n." + plant._id;
+
+      const backofficePrice = document.createElement("small");
+      backofficePrice.className = "font-monospace d-block";
+      backofficePrice.innerText = "Prezzo di acquisto: " + plant.price * 0.8 + "€";
+
+      const publicPrice = document.createElement("small");
+      publicPrice.className = "font-monospace d-block";
+      publicPrice.innerText = "Prezzo al pubblico: " + plant.price + "€";
+
+      textArea.appendChild(title);
+      textArea.appendChild(p);
+      textArea.appendChild(addP);
+      textArea.appendChild(backofficePrice);
+      textArea.appendChild(publicPrice);
+
+      /* flex.appendChild(img);
+      flex.appendChild(textArea);
+
+       col.appendChild(flex); */
+
+      detailContainer.appendChild(img);
+      detailContainer.appendChild(textArea);
     })
     .catch((error) => {
       console.error("Errore durante la fetch:", error);

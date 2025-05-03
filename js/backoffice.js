@@ -1,22 +1,33 @@
-const isId = new URLSearchParams(window.location.search);
-const id = isId.get("plantId;");
+const params = new URLSearchParams(window.location.search);
 
-const url = id ? "https://striveschool-api.herokuapp.com/api/product/" + id : "https://striveschool-api.herokuapp.com/api/product/";
-const method = id ? "PUT" : "POST";
+const plantId = params.get("plantId;");
+console.log(plantId);
+
+const url = plantId ? "https://striveschool-api.herokuapp.com/api/product/" + plantId : "https://striveschool-api.herokuapp.com/api/product/";
+const method = plantId ? "PUT" : "POST";
 const form = document.getElementById("form");
 
 window.onload = function () {
   const variableH = document.getElementById("variableH");
   const successBtn = document.getElementById("successBtn");
-  if (id) {
+  if (plantId) {
     variableH.innerText = "Aggiorna prodotto";
     successBtn.innerText = "Aggiorna";
     const deleteBtn = document.getElementById("deleteBtn");
     deleteBtn.classList.remove("d-none");
 
-    fetch(url)
+    fetch(url, {
+      method: method,
+      body: JSON.stringify(addPlant),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE0ODI5MjFjMjUwNDAwMTUxYWI2NzAiLCJpYXQiOjE3NDYxNzQ2MTAsImV4cCI6MTc0NzM4NDIxMH0.hYrdAU1LOKDI1x3s7Yk3SD28h29gyID1UzQQHyudOfc",
+      },
+    })
       .then((resp) => {
         if (!resp.ok) {
+          //AGGIUNGERE ERRORI SPECIFICI
           throw new Error("Errore nella fetch");
         }
         return resp.json();
@@ -70,7 +81,7 @@ form.onsubmit = function (e) {
       if (id) {
         alert("Hai modificato le caratteristiche del prodotto" + addedPlant.name);
       } else {
-        alert("Hai aggiunto il prodotto" + addedPlant.name + "alla tua vetrina");
+        alert("Hai aggiunto il prodotto " + addedPlant.name + "alla tua vetrina");
         form.reset();
       }
     })

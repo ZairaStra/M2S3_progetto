@@ -13,6 +13,7 @@ const getPlants = () => {
   })
     .then((resp) => {
       if (!resp.ok) {
+        //AGGIUNGERE ERRORI SPECIFICI CON AVVISI DI BOOTSTRAP - NON ALERT
         throw new Error("Errore nel caricamento");
       }
       return resp.json();
@@ -27,6 +28,7 @@ const getPlants = () => {
 
         const cardBody = document.createElement("div");
         cardBody.className = "card-body";
+        cardBody.style = "color: #496247";
 
         const img = document.createElement("img");
         img.className = "bd-placeholder-img card-img-top";
@@ -47,15 +49,16 @@ const getPlants = () => {
         btnGroup.className = "btn-group d-flex";
 
         const viewBtn = document.createElement("a");
-        viewBtn.href = "./details.html";
+        viewBtn.href = `./details.html?plantId=${plant._id}`;
         viewBtn.className = "btn btn-outline-secondary";
         viewBtn.innerText = "Scopri di più";
 
         const editBtn = document.createElement("a");
-        editBtn.href = "./backoffice.html";
+        editBtn.href = `./backoffice.html?plantId=${plant._id}`;
         editBtn.className = "btn btn-outline-secondary";
         editBtn.innerText = "Modifica";
 
+        //SISTEMARE BOTTONE PER AGGIUNGERE AL CARRELLO NEL DROPDOWN DELLA NAVBAR
         /*const selectBtn = document.createElement("button");
         selectBtn.classList.add("btn");
         selectBtn.classList.add("btn-outline-danger");
@@ -70,8 +73,9 @@ const getPlants = () => {
         }; */
 
         const price = document.createElement("small");
-        price.className = "text-muted display-6";
+        price.className = "font-monospace fs-4";
         price.innerText = plant.price + "€";
+        price.style = "color: inherit";
 
         btnGroup.appendChild(viewBtn);
         btnGroup.appendChild(editBtn);
