@@ -39,6 +39,10 @@ const getDetails = () => {
       title.className = "card-title display-4 mb-3";
       title.innerText = plant.name;
 
+      const origin = document.createElement("h4");
+      origin.className = "card-title  mb-3";
+      origin.innerText = plant.brand;
+
       const p = document.createElement("p");
       p.className = "card-text";
       p.innerText = plant.description;
@@ -58,6 +62,7 @@ const getDetails = () => {
       imgCol.appendChild(img);
 
       textCol.appendChild(title);
+      textCol.appendChild(origin);
       textCol.appendChild(p);
       textCol.appendChild(addP);
       textCol.appendChild(backofficePrice);
